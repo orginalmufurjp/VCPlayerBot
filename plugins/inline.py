@@ -31,8 +31,8 @@ from pyrogram import (
 
 buttons = [
     [
-        InlineKeyboardButton('⚡️Make Own Bot', url='https://github.com/subinps/VCPlayerBot'),
-        InlineKeyboardButton('🧩 Join Here', url='https://t.me/subin_works'),
+        InlineKeyboardButton('⚡درخواست نصب ربات', url='https://t.me/DIGRM'),
+        InlineKeyboardButton('🧩 کانال ربات', url='https://t.me/DigiGram24'),
     ]
     ]
 def get_cmd(dur):
@@ -47,7 +47,7 @@ async def search(client, query):
         answers.append(
             InlineQueryResultArticle(
                 title="Deploy",
-                input_message_content=InputTextMessageContent(f"{Config.REPLY_MESSAGE}\n\n<b>You can't use this bot in your group, for that you have to make your own bot from the [SOURCE CODE](https://github.com/subinps/VCPlayerBot) below.</b>", disable_web_page_preview=True),
+                input_message_content=InputTextMessageContent(f"{Config.REPLY_MESSAGE}\n\n<b>💬 من یه ربات پخش کننده آهنگ و فیلم در گروه های تلگرامی هستم ، امکانات جذابی دارم و پرسرعت  هستم با من میتونی به راحتی توی  گروهت نا محدود موزیک پخش کنی ویدیو پخش کنی .حجم فایل هم مهم نیست تا 1.5 گیگ میتونی بهم فایل موزیک یا  فیلم بدی تا توی گروهت  به صورت زنده پخش کنم. ! [سازنده ربات](https://t.me/DIGRM) .</b>", disable_web_page_preview=True),
                 reply_markup=InlineKeyboardMarkup(buttons)
                 )
             )
@@ -58,7 +58,7 @@ async def search(client, query):
         await client.answer_inline_query(
             query.id,
             results=answers,
-            switch_pm_text=("Search a youtube video"),
+            switch_pm_text=("جستجو در یوتیوب"),
             switch_pm_parameter="help",
             cache_time=0
         )
