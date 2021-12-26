@@ -70,37 +70,37 @@ async def cb_handler(client: Client, query: CallbackQuery):
         admins = await get_admins(Config.CHAT)
         if query.data.startswith("info"):
             me, you = query.data.split("_")
-            text="Join @subin_works"
+            text="Join @DigiGram24"
             if you == "volume":
                 await query.answer()
                 await query.message.edit_reply_markup(reply_markup=await volume_buttons())
                 return
             if you == "player":
                 if not Config.CALL_STATUS:
-                    return await query.answer("Not Playing anything.", show_alert=True)
+                    return await query.answer("◂ هیچ رسانه ای پخش نمی شود.", show_alert=True)
                 await query.message.edit_reply_markup(reply_markup=await get_buttons())
                 await query.answer()
                 return
             if you == "video":
-                text="Toggle your bot to Video / Audio Player."
+                text="• ربات خود را به پخش کننده ویدیو / صوتی تغییر دهید."
             elif you == "shuffle":
-                text="Enable or disable auto playlist shuffling"
+                text="• پخش خودکار لیست پخش را فعال یا غیرفعال کنید."
             elif you == "admin":
-                text="Enable to restrict the play command only for admins."
+                text="• برای محدود کردن دستور، پخش فقط برای مدیران فعال شود یا خیر."
             elif you == "mode":
-                text="Enabling Non- stop playback will make the player running 24 / 7 and automatic startup when restarting. "
+                text="• فعال کردن پخش بدون توقف باعث می‌شود پخش‌کننده به‌صورت 24 ساعته کار کند و هنگام راه‌اندازی مجدد، به‌طور خودکار راه‌اندازی شود."
             elif you == "title":
-                text="Enable to edit the VideoChat title to Current playing song's title."
+                text=" فعال کردن ویرایش عنوان چت ویدیویی و عنوان آهنگ پخش فعلی "
             elif you == "reply":
-                text="Choose whether to auto-reply messaged for userbot. "
+                text="• تنظیم حالت ، آیا پیام پاسخ خودکار برای حساب ربات وجود داشته باشد یا خیر."
             elif you == "videorecord":
-                text = "Enable to record both video and audio, if disabled only audio will be recorded."
+                text = "• ضبط ویدیو و صدا را فعال کنید، اگر غیرفعال باشد فقط صدا ضبط می شود."
             elif you == "videodimension":
-                text = "Choose the recording video's dimensions"
+                text = "• ابعاد فیلم ضبط شده را انتخاب کنید."
             elif you == "rectitle":
-                text = "A custom title for your chat recordings, Use /rtitle command to set a title"
+                text = "• یک عنوان سفارشی برای ضبط‌ چت، از دستور /rtitle برای تنظیم عنوان استفاده کنید."
             elif you == "recdumb":
-                text = "A channel to which all the recordings are forwarded. Make sure The User account is admin over there. Set one using /env or /config."
+                text = "•کانالی که تمام موارد ضبط شده به آن ارسال می شود. مطمئن شوید که حساب کاربری در آنجا مدیر است. با استفاده از /env یا /config تنظیم کنید"
             await query.answer(text=text, show_alert=True)
             return
 
@@ -114,8 +114,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             back=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Back", callback_data="help_main"),
-                        InlineKeyboardButton("Close", callback_data="close"),
+                        InlineKeyboardButton("برگشت", callback_data="help_main"),
+                        InlineKeyboardButton("خروج", callback_data="close"),
                     ],
                 ]
                 )
@@ -123,23 +123,23 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton(f"Play", callback_data='help_play'),
-                            InlineKeyboardButton(f"Settings", callback_data=f"help_settings"),
-                            InlineKeyboardButton(f"Recording", callback_data='help_record'),
+                            InlineKeyboardButton(f"• پخش", callback_data='help_play'),
+                            InlineKeyboardButton(f"• تنظیمات", callback_data=f"help_settings"),
+                            InlineKeyboardButton(f"• ضبط", callback_data='help_record'),
                         ],
                         [
-                            InlineKeyboardButton("Scheduling", callback_data="help_schedule"),
-                            InlineKeyboardButton("Controling", callback_data='help_control'),
-                            InlineKeyboardButton("Admins", callback_data="help_admin"),
+                            InlineKeyboardButton("• زمان بندی", callback_data="help_schedule"),
+                            InlineKeyboardButton("• کنترل", callback_data='help_control'),
+                            InlineKeyboardButton("• مدیریت", callback_data="help_admin"),
                         ],
                         [
-                            InlineKeyboardButton(f"Misc", callback_data='help_misc'),
-                            InlineKeyboardButton("Config Vars", callback_data='help_env'),
-                            InlineKeyboardButton("Close", callback_data="close"),
+                            InlineKeyboardButton(f"• تنظیمات بیشتر", callback_data='help_misc'),
+                            InlineKeyboardButton("• پیکربندی", callback_data='help_env'),
+                            InlineKeyboardButton("• تایید و خروج", callback_data="close"),
                         ],
                     ]
                     )
-                await query.message.edit("Showing help menu, Choose from the below options.", reply_markup=reply_markup, disable_web_page_preview=True)
+                await query.message.edit("◂ بخش مورد نظر را انتخاب نمایید :\n─┅━ صفحه راهنما ━┅─", reply_markup=reply_markup, disable_web_page_preview=True)
             elif nyav == 'play':
                 await query.message.edit(Config.PLAY_HELP, reply_markup=back, disable_web_page_preview=True)
             elif nyav == 'settings':
@@ -160,14 +160,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
             
         if not query.from_user.id in admins:
             await query.answer(
-                "😒 Played Joji.mp3",
+                "◂ دست نزن😉😒",
                 show_alert=True
                 )
             return
         #scheduler stuffs
         if query.data.startswith("sch"):
             if query.message.chat.type != "private" and query.message.reply_to_message.from_user is None:
-                return await query.answer("You cant use scheduling here, since you are an anonymous admin. Schedule from private chat.", show_alert=True)
+                return await query.answer("شما نمی توانید زمانبندی پخش را تنظیم کنید، زیرا شما یک مدیر ناشناس هستید. تنظیمات زمانبندی پخش را از چت خصوصی انجام دهید.", show_alert=True)
             if query.message.chat.type != "private" and query.from_user.id != query.message.reply_to_message.from_user.id:
                 return await query.answer("Okda", show_alert=True)
             data = query.data
@@ -194,8 +194,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         else:
                             button.append([InlineKeyboardButton(text=f"{str(month)}  {str(year_)}",callback_data=f"sch_showdate_{year_}_{k}")])
                     button = button + button_
-                    button.append([InlineKeyboardButton("Close", callback_data="schclose")])
-                    await query.message.edit("Now Choose the month to schedule a voicechatㅤ ㅤㅤ", reply_markup=InlineKeyboardMarkup(button))
+                    button.append([InlineKeyboardButton("خروج", callback_data="schclose")])
+                    await query.message.edit("اکنون ماه را برای  زمانبندی چت صوتی انتخاب کنیدㅤ ㅤㅤ", reply_markup=InlineKeyboardMarkup(button))
                 elif day == "none":
                     return
                 else:
@@ -222,8 +222,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         pyear=year-1
                     else:
                         pyear=year
-                    button.append([InlineKeyboardButton("Back", callback_data=f"sch_showdate_{pyear}_{month}"), InlineKeyboardButton("Close", callback_data="schclose")])
-                    await query.message.edit(f"Choose the hour of {date} {smonth} {year} to schedule  a voicechat.", reply_markup=InlineKeyboardMarkup(button))
+                    button.append([InlineKeyboardButton("برگشت", callback_data=f"sch_showdate_{pyear}_{month}"), InlineKeyboardButton("خروج", callback_data="schclose")])
+                    await query.message.edit(f"◂ساعت پخش در {date} {month} {year}  برای برنامه‌ریزی چت صوتی انتخاب کنید.", reply_markup=InlineKeyboardMarkup(button))
 
             elif data.startswith("sch_day"):
                 none, none, year, month, day, hour = data.split("_")
@@ -247,8 +247,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     for d in chunk:
                         k.append(InlineKeyboardButton(text=f"{d}",callback_data=f"sch_minute_{year}_{month}_{day}_{hour}_{d}"))
                     button.append(k)
-                button.append([InlineKeyboardButton("Back", callback_data=f"sch_month_{year}_{month}_{day}"), InlineKeyboardButton("Close", callback_data="schclose")])
-                await query.message.edit(f"Choose minute of {hour}th hour on {day} {smonth} {year} to schedule Voicechat.", reply_markup=InlineKeyboardMarkup(button))
+                button.append([InlineKeyboardButton("برگشت", callback_data=f"sch_month_{year}_{month}_{day}"), InlineKeyboardButton("خروج", callback_data="schclose")])
+                await query.message.edit(f"◂ ساعت {hour} و چند دقیقه در {day} {month} {year}  چت صوتی پخش شود؟ لطفا از گزینه های زیر مقدار  دقیقه را انتخاب کنید.", reply_markup=InlineKeyboardMarkup(button))
 
             elif data.startswith("sch_minute"):
                 none, none, year, month, day, hour, minute = data.split("_")
@@ -260,26 +260,26 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 datetime_object = datetime.datetime.strptime(str(month), "%m")
                 smonth = datetime_object.strftime("%B")
                 if year == today.year and month == today.month and day == today.day and hour == today.hour and minute <= today.minute:
-                    await query.answer("I dont have a timemachine to go to past!!!.")
+                    await query.answer("من ماشین زمان ندارم که به گذشته بروم!!!.")
                     return 
                 final=f"{day}th {smonth} {year} at {hour}:{minute}"
                 button=[
                     [
-                        InlineKeyboardButton("Confirm", callback_data=f"schconfirm_{year}-{month}-{day} {hour}:{minute}"),
-                        InlineKeyboardButton("Back", callback_data=f"sch_day_{year}_{month}_{day}_{hour}")
+                        InlineKeyboardButton("تأیید", callback_data=f"schconfirm_{year}-{month}-{day} {hour}:{minute}"),
+                        InlineKeyboardButton("برگشت", callback_data=f"sch_day_{year}_{month}_{day}_{hour}")
                     ],
                     [
-                        InlineKeyboardButton("Close", callback_data="schclose")
+                        InlineKeyboardButton("خروج", callback_data="schclose")
                     ]
                 ]
                 data=Config.SCHEDULED_STREAM.get(f"{query.message.chat.id}_{query.message.message_id}")
                 if not data:
-                    await query.answer("This schedule is expired", show_alert=True)
+                    await query.answer("این زمانبندی منقضی شده است.", show_alert=True)
                 if data['3'] == "telegram":
                     title=data['1']
                 else:
                     title=f"[{data['1']}]({data['2']})"
-                await query.message.edit(f"Your Stream {title} is now scheduled to start on {final}\n\nClick Confirm to confirm the time.", reply_markup=InlineKeyboardMarkup(button), disable_web_page_preview=True)                
+                await query.message.edit(f"◂پخش زنده زمانبندی شده  **{title} **شما، اکنون برای شروع در  **{final} ** برنامه ریزی شده است\n\nبرای تأیید زمان، روی تأیید کلیک کنید.", reply_markup=InlineKeyboardMarkup(button), disable_web_page_preview=True)                
 
             elif data.startswith("sch_showdate"):
                 tyear=year
@@ -311,8 +311,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             k=d
                         f.append(InlineKeyboardButton(text=f"{k}",callback_data=f"sch_month_{year_}_{month}_{d}"))
                     button.append(f)
-                button.append([InlineKeyboardButton("Close", callback_data="schclose")])
-                await query.message.edit(f"Choose the day of the month you want to schedule the voicechat.\nToday is {thisday} {smonth} {tyear}. Chooosing a date preceeding today will be considered as next year {year+1}", reply_markup=InlineKeyboardMarkup(button))
+                button.append([InlineKeyboardButton("خروج", callback_data="schclose")])
+                await query.message.edit(f"◂ روزی را که می‌خواهید چت صوتی را برنامه‌ ریزی کنید، انتخاب کنید.\nامروز {thisday} {smonth} {year} است. انتخاب تاریخ قبل از امروز به عنوان سال آینده در نظر گرفته می شود {year+1}", reply_markup=InlineKeyboardMarkup(button))
 
             elif data.startswith("schconfirm"):
                 none, date = data.split("_")
@@ -323,61 +323,61 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 Config.SCHEDULE_LIST.append({"job_id":job_id, "date":utc_dt})
                 Config.SCHEDULE_LIST = sorted(Config.SCHEDULE_LIST, key=lambda k: k['date'])
                 await schedule_a_play(job_id, utc_dt)
-                await query.message.edit(f"Succesfully scheduled to stream on <code> {date.strftime('%b %d %Y, %I:%M %p')} </code>")
+                await query.message.edit(f"◂ پخش زنده با موفقیت تنظیم شد به : <code> {date.strftime('%b %d %Y, %I:%M %p')} </code>")
                 await delete_messages([query.message, query.message.reply_to_message])
                 
             elif query.data == 'schcancelall':
                 await cancel_all_schedules()
-                await query.message.edit("All Scheduled Streams are cancelled succesfully.")
+                await query.message.edit("همه پخش های زنده  زمانبندی شده با موفقیت لغو شدند.")
 
             elif query.data == "schcancel":
                 buttons = [
                     [
-                        InlineKeyboardButton('Yes, Iam Sure!!', callback_data='schcancelall'),
-                        InlineKeyboardButton('No', callback_data='schclose'),
+                        InlineKeyboardButton('بله مطمئن هستم!!', callback_data='schcancelall'),
+                        InlineKeyboardButton('خیر', callback_data='schclose'),
                     ]
                 ]
-                await query.message.edit("Are you sure that you want to cancel all the scheduled streams?", reply_markup=InlineKeyboardMarkup(buttons))
+                await query.message.edit("آیا مطمئن هستید که می‌خواهید همه پخش‌های برنامه‌ریزی‌شده را لغو کنید؟", reply_markup=InlineKeyboardMarkup(buttons))
             elif data == "schclose":
-                await query.answer("Menu Closed")
+                await query.answer("• منوی رُبات با موفقیت بسته شد !")
                 await query.message.delete()
                 await query.message.reply_to_message.delete()
 
         elif query.data == "shuffle":
             if not Config.playlist:
-                await query.answer("Playlist is empty.", show_alert=True)
+                await query.answer("لیست پخش خالی است.", show_alert=True)
                 return
             await shuffle_playlist()
-            await query.answer("Playlist shuffled.")
+            await query.answer("لیست پخش بهم زده شد.")
             await sleep(1)        
             await query.message.edit_reply_markup(reply_markup=await get_buttons())
     
 
-        elif query.data.lower() == "pause":
+        elif query.data.lower() == "مکث":
             if Config.PAUSE:
-                await query.answer("Already Paused", show_alert=True)
+                await query.answer("پخش قبلاً متوقف شده است.", show_alert=True)
             else:
                 await pause()
-                await query.answer("Stream Paused")
+                await query.answer("پخش متوقف شد.")
                 await sleep(1)
 
             await query.message.edit_reply_markup(reply_markup=await get_buttons())
  
         
-        elif query.data.lower() == "resume":   
+        elif query.data.lower() == "ادامه":   
             if not Config.PAUSE:
-                await query.answer("Nothing Paused to resume", show_alert=True)
+                await query.answer("چیزی پخش نشده است که ادامه آن پخش شود.", show_alert=True)
             else:
                 await resume()
-                await query.answer("Redumed the stream")
+                await query.answer("پخش از ادامه شروع شد.")
                 await sleep(1)
             await query.message.edit_reply_markup(reply_markup=await get_buttons())
           
         elif query.data=="skip": 
             if not Config.playlist:
-                await query.answer("No songs in playlist", show_alert=True)
+                await query.answer("هیچ رسانه ای در لیست پخش وجود ندارد.", show_alert=True)
             else:
-                await query.answer("Trying to skip from playlist.")
+                await query.answer("درحال رد کردن لیست پخش.")
                 await skip()
                 await sleep(1)
             if Config.playlist:
@@ -393,9 +393,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
         elif query.data=="replay":
             if not Config.playlist:
-                await query.answer("No songs in playlist", show_alert=True)
+                await query.answer("هیچ رسانه ای در لیست پخش وجود ندارد.", show_alert=True)
             else:
-                await query.answer("trying to restart player")
+                await query.answer("درحال راه اندازی پخش مجدد")
                 await restart_playout()
                 await sleep(1)
             await query.message.edit_reply_markup(reply_markup=await get_buttons())
@@ -404,23 +404,23 @@ async def cb_handler(client: Client, query: CallbackQuery):
         elif query.data.lower() == "mute":
             if Config.MUTED:
                 await unmute()
-                await query.answer("Unmuted stream")
+                await query.answer("پخش صدا دار شد.")
             else:
                 await mute()
-                await query.answer("Muted stream")
+                await query.answer("پخش بی صدا شد.")
             await sleep(1)
             await query.message.edit_reply_markup(reply_markup=await volume_buttons())
 
         elif query.data.lower() == 'seek':
             if not Config.CALL_STATUS:
-                return await query.answer("Not Playing anything.", show_alert=True)
+                return await query.answer("رسانه ای پخش نمی شود.", show_alert=True)
             #if not (Config.playlist or Config.STREAM_LINK):
                 #return await query.answer("Startup stream cant be seeked.", show_alert=True)
-            await query.answer("trying to seek.")
+            await query.answer("در حالِ جلو بُردن رسانه.")
             data=Config.DATA.get('FILE_DATA')
             if not data.get('dur', 0) or \
                 data.get('dur') == 0:
-                return await query.answer("This is a live stream and cannot be seeked.", show_alert=True)
+                return await query.answer("پخش زنده قابل جا به جایی به جلو ندارد.", show_alert=True)
             k, reply = await seek_file(10)
             if k == False:
                 return await query.answer(reply, show_alert=True)
@@ -428,14 +428,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
         elif query.data.lower() == 'rewind':
             if not Config.CALL_STATUS:
-                return await query.answer("Not Playing anything.", show_alert=True)
+                return await query.answer("رسانه ای پخش نمی شود.", show_alert=True)
             #if not (Config.playlist or Config.STREAM_LINK):
                 #return await query.answer("Startup stream cant be seeked.", show_alert=True)
-            await query.answer("trying to rewind.")
+            await query.answer("در حالِ عقب بُردنِ رسانه.")
             data=Config.DATA.get('FILE_DATA')
             if not data.get('dur', 0) or \
                 data.get('dur') == 0:
-                return await query.answer("This is a live stream and cannot be seeked.", show_alert=True)
+                return await query.answer("این یک پخش زنده است و نمی توان آن را تغییر داد.", show_alert=True)
             k, reply = await seek_file(-10)
             if k == False:
                 return await query.answer(reply, show_alert=True)
@@ -445,10 +445,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
         elif query.data == 'restart':
             if not Config.CALL_STATUS:
                 if not Config.playlist:
-                    await query.answer("Player is empty, starting STARTUP_STREAM.")
+                    await query.answer("پخش کننده خالی است، رسانه پیش فرض شروع به پخش می شود.")
                 else:
-                    await query.answer('Resuming the playlist')
-            await query.answer("Restrating the player")
+                    await query.answer('از سرگیری لیست پخش')
+            await query.answer("راه اندازی مجدد پخش کننده")
             await restart()
             await query.message.edit(text=await get_playlist_str(), reply_markup=await get_buttons(), disable_web_page_preview=True)
 
@@ -462,7 +462,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 else:
                     vol=Config.VOLUME+10
                 if not (1 <= vol <= 200):
-                    return await query.answer("Only 1-200 range accepted.")
+                    return await query.answer("فقط رنج 1-200 مورد قبول است.")
                 await volume(vol)
                 Config.VOLUME=vol
                 await query.message.edit_reply_markup(reply_markup=await volume_buttons())
@@ -472,7 +472,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 else:
                     vol=Config.VOLUME-10
                 if not (1 <= vol <= 200):
-                    return await query.answer("Only 1-200 range accepted.")
+                    return await query.answer("فقط رنج 1-200 مورد قبول است.")
                 await volume(vol)
                 Config.VOLUME=vol
                 await query.message.edit_reply_markup(reply_markup=await volume_buttons())
@@ -528,18 +528,18 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     if k == False:
                         await query.answer(msg, show_alert=True)
                     else:
-                        await query.answer("Recording Stopped")
+                        await query.answer("ضبط متوقف شد.")
                 else:
                     k, msg = await start_record_stream()
                     if k == False:
                         await query.answer(msg, show_alert=True)
                     else:
-                        await query.answer("Recording started")
+                        await query.answer("ضبط شروع شد.")
                 await query.message.edit_reply_markup(reply_markup=(await recorder_settings()))
 
             elif query.data == "set_new_chat":
                 if query.from_user is None:
-                    return await query.answer("You cant do scheduling here, since you are an anonymous admin. Schedule from private chat.", show_alert=True)
+                    return await query.answer("شما نمی توانید زمانبندی پخش را تنظیم کنید، زیرا شما یک مدیر ناشناس هستید. تنظیمات زمانبندی پخش را از چت خصوصی انجام دهید.", show_alert=True)
                 if query.from_user.id in Config.SUDO:
                     await query.answer("Setting up new CHAT")
                     chat=query.message.chat.id
@@ -553,7 +553,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     await query.message.edit("Succesfully Changed Chat")
                     await sync_to_db()
                 else:
-                    await query.answer("This can only be used by SUDO users", show_alert=True)
+                    await query.answer("این قابلیت فقط توسط کاربران سودو قابل استفاده است.", show_alert=True)
             if not Config.DATABASE_URI:
                 await query.answer("No DATABASE found, this changes are saved temporarly and will be reverted on restart. Add MongoDb to make this permanant.")
         elif query.data.startswith("close"):
@@ -561,7 +561,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 if query.from_user.id in Config.SUDO:
                     await query.message.delete()
                 else:
-                    await query.answer("This can only be used by SUDO users", show_alert=True)  
+                    await query.answer("این قابلیت فقط توسط کاربران سودو قابل استفاده است.", show_alert=True)  
             else:
                 if query.message.chat.type != "private" and query.message.reply_to_message:
                     if query.message.reply_to_message.from_user is None:
@@ -572,6 +572,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     pass
                 else:
                     return await query.answer("Okda", show_alert=True)
-                await query.answer("Menu Closed")
+                await query.answer("• منوی رُبات با موفقیت بسته شد !")
                 await query.message.delete()
         await query.answer()
