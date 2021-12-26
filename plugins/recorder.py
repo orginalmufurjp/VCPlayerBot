@@ -37,23 +37,23 @@ admin_filter=filters.create(is_admin)
 
 @Client.on_message(filters.command(["record", f"record@{Config.BOT_USERNAME}"]) & admin_filter & chat_filter)
 async def record_vc(bot, message):
-    await message.reply("Configure you VCPlayer Recording settings from hereㅤㅤ ㅤ", reply_markup=(await recorder_settings()))
+    await message.reply("• بخش مورد نظر را انتخاب کنید :\n─┅━ صفحه ضبط ━┅─ㅤㅤ ㅤ", reply_markup=(await recorder_settings()))
     await delete_messages([message])
 
 @Client.on_message(filters.command(["rtitle", f"rtitle@{Config.BOT_USERNAME}"]) & admin_filter & chat_filter)
 async def recording_title(bot, message):
-    m=await message.reply("Checking..")
+    m=await message.reply("•  درحال بررسی ...")
     if " " in message.text:
         cmd, title = message.text.split(" ", 1)
     else:
-        await m.edit("Give me a new title. Use /rtitle < Custom Title >\nUse <code>False</code> to revert to default title")
+        await m.edit("•  عنوان جدید از الگوی زیر استفاده نمایید.\n<code>/rtitle عنوان سفارشی</code>\n◂برای برگشت به حالت پیشفرض از عبارت False بعد از توشتن  دستور استفاده کنید.")
         await delete_messages([message, m])
         return
 
     if Config.DATABASE_URI:
-        await m.edit("Mongo DB Found, Setting up recording title...") 
+        await m.edit("دیتابیس یافت شد. درحال تنظیم عنوان ضبط ...") 
         if title == "False":
-            await m.edit(f"Sucessfully removed custom recording title.")
+            await m.edit(f"عنوان ضبط سفارشی با موفقیت حذف شد.")
             Config.RECORDING_TITLE=False
             await sync_to_db()
             await delete_messages([message, m])           
@@ -61,7 +61,7 @@ async def recording_title(bot, message):
         else:
             Config.RECORDING_TITLE=title
             await sync_to_db()
-            await m.edit(f"Succesfully changed recording title to {title}")
+            await m.edit(f"• عنوان ضبط با موفقیت تغییر یافت به  {title}")
             await delete_messages([message, m])
             return
     else:
@@ -75,15 +75,15 @@ async def recording_title(bot, message):
         config = Config.HEROKU_APP.config()
         if title == "False":
             if "RECORDING_TITLE" in config:
-                await m.edit(f"Sucessfully removed custom recording title. Now restarting..")
+                await m.edit(f"• عنوان ضبط سفارشی با موفقیت حذف شد.درحال راه اندازی مجدد ...")
                 await delete_messages([message])
                 del config["RECORDING_TITLE"]                
                 config["RECORDING_TITLE"] = None
             else:
-                await m.edit(f"Its already default title, nothing was changed")
+                await m.edit(f"• در حال حاضر عنوان پیش فرض تنظیم شده است. تغییراتی ایجاد نشده است.")
                 Config.RECORDING_TITLE=False
                 await delete_messages([message, m])
         else:
-            await m.edit(f"Succesfully changed recording title to {title}, Now restarting")
+            await m.edit(f"عنوان ضبط با موفقیت به {title} تغییر کرد، درحال راه اندازی مجدد ...")
             await delete_messages([message])
             config["RECORDING_TITLE"] = title
