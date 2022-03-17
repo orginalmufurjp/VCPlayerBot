@@ -1352,7 +1352,7 @@ async def resume():
             start=Config.DUR.get('TIME')
             if start:
                 Config.DUR['TIME']=start+diff
-        Config.PAUSE=False        
+        Config.PAUSE=False
         return True
     except GroupCallNotFound:
         await restart_playout()
