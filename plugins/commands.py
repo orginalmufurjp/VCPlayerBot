@@ -129,8 +129,8 @@ async def start(client, message):
         return
     buttons = [
         [
-            InlineKeyboardButton('⚙️ کانال دیجی گرام 24', url='https://t.me/DigiGram24'),
-            InlineKeyboardButton('🧩 درخواست نصب ربات', url='https://t.me/DIGRM')
+            InlineKeyboardButton('⚙️ کانال موزیک 24', url='https://t.me/OnlineMusic24'),
+            InlineKeyboardButton('🧩 درخواست نصب ربات', url='https://t.me/General_Soft_War')
         ],
         [
             InlineKeyboardButton('👨🏼‍🦯 راهنما', callback_data='help_main'),
@@ -188,15 +188,15 @@ async def show_help(client, message):
 async def repo_(client, message):
     buttons = [
         [
-            InlineKeyboardButton('🧩 سازنده ربات', url='https://t.me/DIGRM'),
-            InlineKeyboardButton('⚙️ کانال ربات', url='https://t.me/DigiGram24'),     
+            InlineKeyboardButton('🧩 پشتیبانی ربات', url='https://t.me/General_Soft_War'),
+            InlineKeyboardButton('⚙️ کانال ربات', url='https://t.me/OnlineMusic24'),     
         ],
         [
-            InlineKeyboardButton("🎞 نحوه فعالسازی ربات", url='https://t.me/DIGRM'),
+            InlineKeyboardButton("🎞 نحوه فعالسازی ربات", url='https://t.me/General_Soft_War'),
             InlineKeyboardButton('🗑 خروج', callback_data='close'),
         ]
     ]
-    await message.reply("<b>برای اطلاع  بیشتر و نصب ربات پخش کننده موزیک و ویدیو در گروهتان با آیدی سازنده ربات در ارتباط باشید. <a href=https://t.me/DIGRM>DigiGram24.</a>\n هم ویدیو هم موزیک قابل پخش است.\n\nبدون محدویت حجم فایل 🙃.</b>", reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
+    await message.reply("<b>برای اطلاع  بیشتر و نصب ربات پخش کننده موزیک و ویدیو در گروهتان با آیدی سازنده ربات در ارتباط باشید. <a href=https://t.me/General_Soft_War>OnlineMusic24.</a>\n هم ویدیو هم موزیک قابل پخش است.\n\nبدون محدویت حجم فایل 🙃.</b>", reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
     await delete_messages([message])
 
 @Client.on_message(filters.command(['restart', 'update', f"restart@{Config.BOT_USERNAME}", f"update@{Config.BOT_USERNAME}"]) & admin_filter & chat_filter)
@@ -258,7 +258,7 @@ async def set_heroku_var(client, message):
                     await delete_messages([message])
                     return
                 else:
-                    await m.edit("ورودی ارسالی نامعتبر است. از سازنده ربات (@DIGRM) درخواست کمک نمایید.")
+                    await m.edit("ورودی ارسالی نامعتبر است. از سازنده ربات (@General_Soft_War) درخواست کمک نمایید.")
                     await delete_messages([message, m])
                     return     
             
